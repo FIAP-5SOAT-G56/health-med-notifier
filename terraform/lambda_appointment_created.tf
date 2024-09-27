@@ -28,6 +28,15 @@ resource "aws_iam_role" "lambda_appointment_created" {
   ]
 }
 
+resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_appointment_created" {
+  role       = aws_iam_role.lambda_appointment_created.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+
+  depends_on = [
+    aws_iam_role.lambda_appointment_created
+  ]
+}
+
 resource "aws_iam_role_policy_attachment" "AWSLambdaBasicExecutionRole_appointment_created" {
   role       = aws_iam_role.lambda_appointment_created.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
